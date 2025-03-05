@@ -9,9 +9,7 @@ import { isAndroid } from './app/lib/methods/helpers';
 if (__DEV__) {
 	require('./app/ReactotronConfig');
 } else {
-	console.log = (
-		
-	) => {};
+	console.log = () => {};
 	console.time = () => {};
 	console.timeLog = () => {};
 	console.timeEnd = () => {};
