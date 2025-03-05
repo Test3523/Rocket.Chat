@@ -21,8 +21,7 @@ import { debounce, isTablet } from './lib/methods/helpers';
 import { toggleAnalyticsEventsReport, toggleCrashErrorsReport } from './lib/methods/helpers/log';
 import parseQuery from './lib/methods/helpers/parseQuery';
 import {
-	getTheme,
-	initialTheme,
+	getTheme, initialTheme,
 	newThemeState,
 	setNativeTheme,
 	subscribeTheme,
