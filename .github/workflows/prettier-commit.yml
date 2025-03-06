@@ -1,4 +1,4 @@
-name: Format Code with Prettier (on commit)
+name: Format Code with Prettier
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   format:
-    if: ${{ github.repository != 'Test3523/Rocket.Chat.ReactNative' || (github.ref != 'refs/heads/main' && github.ref != 'refs/heads/develop') }}
+    if: ${{ github.repository != 'RocketChat/Rocket.Chat.ReactNative' || (github.ref != 'refs/heads/master' && github.ref != 'refs/heads/develop' && github.ref != 'refs/heads/single-server') }}
     runs-on: ubuntu-latest
 
     steps:
@@ -28,7 +28,7 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-node-modules-
+            ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
       
       - name: Install dependencies
         run: yarn install
@@ -48,9 +48,10 @@ jobs:
           fi
       
       - name: Commit and push changes
+        if: env.changes == 'true'
         run: |
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
           git add .
-          git commit -m "chore: format code with Prettier"
+          git commit -m "chore: format code with Prettier [skip ci]"
           git push origin ${{ github.ref_name }}
